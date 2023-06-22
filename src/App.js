@@ -32,9 +32,11 @@ const App = () => {
   };
 
   useEffect(() => {
-    axios.get("/api").then((result) => setMovies(result.data.results));
     axios
-      .get("/api/me")
+      .get("http://187.162.118.101:3000/api")
+      .then((result) => setMovies(result.data.results));
+    axios
+      .get("http://187.162.118.101:3000/api/me")
       .then((res) => res.data)
       .then((user) => {
         console.log(`found user ${user.username}`);
