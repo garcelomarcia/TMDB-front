@@ -9,7 +9,7 @@ const Detail = (props) => {
   const [movie, setMovie] = useState({});
   useEffect(() => {
     axios
-      .get(`http://187.162.118.101:3000/api/${type}/${id}`)
+      .get(`https://187.162.118.101:3000/api/${type}/${id}`)
       .then((result) => setMovie(result.data));
   }, []);
   console.log(movie);
@@ -17,7 +17,7 @@ const Detail = (props) => {
   const addToFavorites = () => {
     const user = document.getElementById("username").textContent;
     axios
-      .post(`http://187.162.118.101:3000/api/favorites/${id}`, {
+      .post(`https://187.162.118.101:3000/api/favorites/${id}`, {
         media_id: id,
         type: type,
         poster_path: movie.poster_path,
