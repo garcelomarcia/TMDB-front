@@ -9,7 +9,7 @@ const Favorites = ({ user }) => {
 
   useEffect(() => {
     axios
-      .post(`https://187.162.118.101:3000/api/favorites`, {
+      .post(`https://tmdb-back-w5b3.onrender.com/api/favorites`, {
         username: user,
       })
       .then((res) => {
@@ -21,7 +21,7 @@ const Favorites = ({ user }) => {
   const handleDelete = (e) => {
     const path = e.target.previousSibling.href.split("/");
     const id = path.pop();
-    axios.delete(`https://187.162.118.101:3000/api/favorites/${id}`);
+    axios.delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`);
   };
   return (
     <div className="favorites">

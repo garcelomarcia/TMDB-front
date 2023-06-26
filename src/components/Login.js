@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     axios
       .post(
-        `https://187.162.118.101:3000/api/login`,
+        `https://tmdb-back-w5b3.onrender.com/api/login`,
         { ...user },
         { withCredentials: true, credentials: "include" }
       )
@@ -32,7 +32,7 @@ const Login = () => {
   const handleSignup = (e) => {
     e.preventDefault();
     axios
-      .post(`https://187.162.118.101:3000/api/signup`, { ...user })
+      .post(`https://tmdb-back-w5b3.onrender.com/api/signup`, { ...user })
       .then((res) => res.data)
       .then((user) => {
         alert(`New user created ${user.username}`);
