@@ -58,7 +58,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <form className="form">
+      <form className="form" onSubmit={handleLogin}>
         <h3>Login/Signup</h3>
         <input
           type="text"
@@ -77,10 +77,8 @@ const Login = () => {
           onChange={handleChange}
         />
         <div className="login-buttons">
-          <button type="submit" onClick={handleLogin}>
-            Login
-          </button>
-          <button type="submit" onClick={handleSignup}>
+          <button type="submit">Login</button>
+          <button type="button" onClick={handleSignup}>
             Signup
           </button>
         </div>
