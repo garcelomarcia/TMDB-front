@@ -12,7 +12,6 @@ const Login = () => {
       [evt.target.name]: value,
     });
   };
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -21,6 +20,9 @@ const Login = () => {
         { ...user }
       );
       const token = response.data;
+
+      // Print the token to check if it is received correctly
+      console.log("Token:", token);
 
       // Store the token in localStorage
       localStorage.setItem("token", token);
