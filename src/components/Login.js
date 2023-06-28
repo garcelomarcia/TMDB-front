@@ -15,10 +15,11 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log(user);
     try {
       const response = await axios.post(
         `https://tmdb-back-w5b3.onrender.com/api/login`,
-        user // Send the user object directly as the request body
+        { ...user }
       );
 
       const token = response.data;
