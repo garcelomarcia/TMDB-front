@@ -24,6 +24,8 @@ const Login = () => {
 
       const token = response.data;
 
+      console.log(token);
+
       // Store the token in localStorage
       localStorage.setItem("token", token);
 
