@@ -14,6 +14,7 @@ const Login = () => {
   };
 
   const handleLogin = async (e) => {
+    console.log(user);
     e.preventDefault();
     try {
       console.log(user);
@@ -58,6 +59,7 @@ const Login = () => {
       .catch(() => alert("Signup Failed"));
   };
 
+  console.log(user);
   return (
     <div className="login">
       <form className="form" onSubmit={handleLogin}>
