@@ -21,7 +21,7 @@ const Login = () => {
       );
       console.log(response);
 
-      const token = response;
+      const token = response.data;
 
       // Print the token to check if it is received correctly
       console.log("Token:", token);
