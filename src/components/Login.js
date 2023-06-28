@@ -13,20 +13,29 @@ const Login = () => {
     });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    axios
-      .post(
-        `https://tmdb-back-w5b3.onrender.com/api/login`,
-        { ...user },
-        { withCredentials: true, credentials: "include" }
-      )
-      .then((res) => res.data)
-      .then((user) => {
-        alert(`Logged in as ${user.username}`);
-      })
-      .then(() => navigate("/"))
-      .catch(() => alert("Login Failed"));
+    try {
+      await axios
+        .post(`https://tmdb-back-w5b3.onrender.com/api/login`, { ...user })
+        .then((res) => res.data)
+        .then((token) => {
+          localStorage.setItem("token", token);
+        });
+      await axios;
+      axios
+        .get("/me", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => res.data)
+        .then((user) => {
+          alert(`Logged in ast ${user.username}`);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSignup = (e) => {
