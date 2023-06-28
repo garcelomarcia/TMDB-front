@@ -19,7 +19,7 @@ const Login = () => {
     try {
       const response = await axios.post(
         `https://tmdb-back-w5b3.onrender.com/api/login`,
-        { ...user }
+        { username: user.username, password: user.password }
       );
 
       const token = response.data;
