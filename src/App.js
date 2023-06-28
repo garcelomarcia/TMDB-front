@@ -8,7 +8,6 @@ import Menubar from "./components/Menubar";
 import Favorites from "./components/Favorites";
 // import api_key from "../api/config";
 const api_key = "a763d45bd50154ae259188fe582406df";
-import { useLocalStorage } from "./hooks/useLocalstorage";
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [isLoggedIn, setLogin] = useState("");
