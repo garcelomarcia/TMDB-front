@@ -19,15 +19,15 @@ const Login = () => {
         `https://tmdb-back-w5b3.onrender.com/api/login`,
         { ...user }
       );
-      console.log(response);
+
+      console.log(response); // Check the entire response object
 
       const token = response.data;
 
-      // Print the token to check if it is received correctly
-      console.log("Token:", token);
+      console.log("Token:", token); // Check the token value
 
       // Store the token in localStorage
-      window.localStorage.setItem("token", token);
+      localStorage.setItem("token", token);
 
       // Make a separate request to fetch user data using the token
       const userResponse = await axios.get("/me", {
@@ -35,9 +35,11 @@ const Login = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       const user = userResponse.data;
 
-      console.log(user);
+      console.log(user); // Check the user data
+
       // Set the user and show an alert
       setUser(user);
       alert(`Logged in as ${user.username}`);
