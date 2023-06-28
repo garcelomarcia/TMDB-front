@@ -14,9 +14,9 @@ const Login = () => {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    console.log(user);
     try {
+      e.preventDefault();
+      console.log(user);
       const response = await axios.post(
         "https://tmdb-back-w5b3.onrender.com/api/login",
         user
