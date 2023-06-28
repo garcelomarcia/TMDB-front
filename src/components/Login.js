@@ -20,11 +20,7 @@ const Login = () => {
         { ...user }
       );
 
-      console.log(response); // Check the entire response object
-
       const token = response.data;
-
-      console.log("Token:", token); // Check the token value
 
       // Store the token in localStorage
       localStorage.setItem("token", token);
@@ -37,8 +33,6 @@ const Login = () => {
       });
 
       const user = userResponse.data;
-
-      console.log(user); // Check the user data
 
       // Set the user and show an alert
       setUser(user);
