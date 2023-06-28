@@ -19,7 +19,7 @@ const Login = () => {
         `https://tmdb-back-w5b3.onrender.com/api/login`,
         { ...user }
       );
-      const token = response.data;
+      const token = response;
 
       // Print the token to check if it is received correctly
       console.log("Token:", token);
@@ -35,6 +35,7 @@ const Login = () => {
       });
       const user = userResponse.data;
 
+      console.log(user);
       // Set the user and show an alert
       setUser(user);
       alert(`Logged in as ${user.username}`);
