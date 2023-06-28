@@ -25,7 +25,7 @@ const Login = () => {
       console.log("Token:", token);
 
       // Store the token in localStorage
-      localStorage.setItem("token", token);
+      window.localStorage.setItem("token", token);
 
       // Make a separate request to fetch user data using the token
       const userResponse = await axios.get("/me", {
