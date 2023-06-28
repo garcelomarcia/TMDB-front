@@ -15,13 +15,11 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(user);
 
     axios
       .post("https://tmdb-back-w5b3.onrender.com/api/login", user)
       .then((response) => {
         const token = response.data;
-        console.log(token);
 
         // Store the token in localStorage
         localStorage.setItem("token", token);
@@ -35,7 +33,6 @@ const Login = () => {
       })
       .then((userResponse) => {
         const user = userResponse.data;
-        console.log(user);
 
         // Set the user and show an alert
         setUser(user);
