@@ -13,38 +13,37 @@ const Login = () => {
     });
   };
 
-  const handleLogin = async (e) => {
-    console.log(user);
+  const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      console.log(user);
-      const response = await axios.post(
-        "https://tmdb-back-w5b3.onrender.com/api/login",
-        user
-      );
+    console.log(user);
 
-      const token = response.data;
+    axios
+      .post("https://tmdb-back-w5b3.onrender.com/api/login", user)
+      .then((response) => {
+        const token = response.data;
+        console.log(token);
 
-      console.log(token);
+        // Store the token in localStorage
+        localStorage.setItem("token", token);
 
-      // Store the token in localStorage
-      localStorage.setItem("token", token);
+        // Make a separate request to fetch user data using the token
+        return axios.get("/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      })
+      .then((userResponse) => {
+        const user = userResponse.data;
+        console.log(user);
 
-      // Make a separate request to fetch user data using the token
-      const userResponse = await axios.get("/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // Set the user and show an alert
+        setUser(user);
+        alert(`Logged in as ${user.username}`);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-
-      const user = userResponse.data;
-
-      // Set the user and show an alert
-      setUser(user);
-      alert(`Logged in as ${user.username}`);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const handleSignup = (e) => {
@@ -59,7 +58,6 @@ const Login = () => {
       .catch(() => alert("Signup Failed"));
   };
 
-  console.log(user);
   return (
     <div className="login">
       <form className="form" onSubmit={handleLogin}>
