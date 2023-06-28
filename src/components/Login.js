@@ -16,26 +16,26 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const logged_token = await axios
-        .post(`https://tmdb-back-w5b3.onrender.com/api/login`, { ...user })
-        .then((res) => res.data)
-        .then((token) => {
-          localStorage.setItem("token", token);
-          return token;
-        });
-      await axios
-        .get("/me", {
-          headers: {
-            Authorization: `Bearer ${
-              localStorage.getItem("token") || logged_token
-            }`,
-          },
-        })
-        .then((res) => res.data)
-        .then((user) => {
-          setUser(user);
-          alert(`Logged in ast ${user.username}`);
-        });
+      const response = await axios.post(
+        `https://tmdb-back-w5b3.onrender.com/api/login`,
+        { ...user }
+      );
+      const token = response.data;
+
+      // Store the token in localStorage
+      localStorage.setItem("token", token);
+
+      // Make a separate request to fetch user data using the token
+      const userResponse = await axios.get("/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const user = userResponse.data;
+
+      // Set the user and show an alert
+      setUser(user);
+      alert(`Logged in as ${user.username}`);
     } catch (error) {
       console.log(error);
     }
