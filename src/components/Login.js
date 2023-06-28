@@ -16,21 +16,24 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await axios
+      const logged_token = await axios
         .post(`https://tmdb-back-w5b3.onrender.com/api/login`, { ...user })
         .then((res) => res.data)
         .then((token) => {
           localStorage.setItem("token", token);
+          return token;
         });
-      await axios;
-      axios
+      await axios
         .get("/me", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${
+              localStorage.getItem("token") || logged_token
+            }`,
           },
         })
         .then((res) => res.data)
         .then((user) => {
+          setUser(user);
           alert(`Logged in ast ${user.username}`);
         });
     } catch (error) {
