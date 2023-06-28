@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({ username: null, password: null });
+  const [user, setUser] = useState({ username: "", password: "" });
 
   const handleChange = (evt) => {
     const value = evt.target.value;
