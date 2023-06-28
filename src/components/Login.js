@@ -19,6 +19,8 @@ const Login = () => {
         `https://tmdb-back-w5b3.onrender.com/api/login`,
         { ...user }
       );
+      console.log(response);
+
       const token = response;
 
       // Print the token to check if it is received correctly
