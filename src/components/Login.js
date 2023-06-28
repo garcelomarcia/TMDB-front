@@ -27,7 +27,7 @@ const Login = () => {
         localStorage.setItem("token", token);
 
         // Make a separate request to fetch user data using the token
-        return axios.get("/me", {
+        return axios.get("https://tmdb-back-w5b3.onrender.com/api/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
