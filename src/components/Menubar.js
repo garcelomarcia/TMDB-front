@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Menubar.css";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg";
 import axios from "axios";
 
 const Menubar = ({ handleSubmit, handleBrowse, isLoggedIn }) => {
+  const [logged, setLogged] = useState(isLoggedIn);
   const navigate = useNavigate();
   const handleLogout = () => {
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    // document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    localStorage.removeItem("token");
+    setLogged("");
     navigate("/login");
   };
   return (
