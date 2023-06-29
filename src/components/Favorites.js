@@ -3,52 +3,48 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Favorites = ({ user }) => {
-  const Favorites = ({ user }) => {
-    const [movies, setMovies] = useState([]);
-    const [tv, setTv] = useState([]);
-    const [deletedId, setDeletedId] = useState(null); // New state variable to store the deleted id
+  const [movies, setMovies] = useState([]);
+  const [tv, setTv] = useState([]);
+  const [deletedId, setDeletedId] = useState(null); // New state variable to store the deleted id
 
-    useEffect(() => {
-      axios
-        .post(`https://tmdb-back-w5b3.onrender.com/api/favorites`, {
-          username: user,
-        })
-        .then((res) => {
-          setMovies(res.data.movieList);
-          setTv(res.data.tvList);
-        });
-    }, []);
+  useEffect(() => {
+    axios
+      .post(`https://tmdb-back-w5b3.onrender.com/api/favorites`, {
+        username: user,
+      })
+      .then((res) => {
+        setMovies(res.data.movieList);
+        setTv(res.data.tvList);
+      });
+  }, []);
 
-    const handleDelete = (e) => {
-      const path = e.target.previousSibling.href.split("/");
-      const id = path[path.length - 1];
-      const type = path[path.length - 2];
-      console.log(id, type);
-      if (type === "movies") {
-        const updatedMovies = movies.filter((movie) => movie.media_id !== id);
-        setMovies(updatedMovies);
-      } else {
-        const updatedTv = tv.filter((show) => show.media_id !== id);
-        setTv(updatedTv);
-      }
-      setDeletedId(id); // Store the deleted id in the state variable
-    };
-
-    useEffect(() => {
-      if (deletedId) {
-        axios
-          .delete(
-            `https://tmdb-back-w5b3.onrender.com/api/favorites/${deletedId}`
-          )
-          .then(() => {
-            // Reset the deletedId state variable after successful deletion
-            setDeletedId(null);
-          });
-      }
-    }, [deletedId]);
-
-    // Rest of your component code...
+  const handleDelete = (e) => {
+    const path = e.target.previousSibling.href.split("/");
+    const id = path[path.length - 1];
+    const type = path[path.length - 2];
+    console.log(id, type);
+    if (type === "movies") {
+      const updatedMovies = movies.filter((movie) => movie.media_id !== id);
+      setMovies(updatedMovies);
+    } else {
+      const updatedTv = tv.filter((show) => show.media_id !== id);
+      setTv(updatedTv);
+    }
+    setDeletedId(id); // Store the deleted id in the state variable
   };
+
+  useEffect(() => {
+    if (deletedId) {
+      axios
+        .delete(
+          `https://tmdb-back-w5b3.onrender.com/api/favorites/${deletedId}`
+        )
+        .then(() => {
+          // Reset the deletedId state variable after successful deletion
+          setDeletedId(null);
+        });
+    }
+  }, [deletedId]);
 
   return (
     <div className="favorites">
