@@ -9,7 +9,7 @@ import Favorites from "./components/Favorites";
 // import api_key from "../api/config";
 const api_key = "a763d45bd50154ae259188fe582406df";
 const App = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [isLoggedIn, setLogin] = useState("");
 
@@ -55,8 +55,8 @@ const App = () => {
         // Set the user and show an alert
         setLogin(user.username);
         alert(`Logged in as ${user.username}`);
-        navigate("/");
-        window.location.reload();
+        // navigate("/");
+        // window.location.reload();
       })
       .catch((error) => {
         console.log(error);
