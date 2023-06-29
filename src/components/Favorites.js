@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Favorites = ({ user }) => {
   const [movies, setMovies] = useState([]);
@@ -24,15 +24,17 @@ const Favorites = ({ user }) => {
     console.log(id, type);
     if (type === "movies") {
       const updatedMovies = movies.filter((movie) => movie.media_id !== id);
-      console.log(updatedMovies);
       setMovies(updatedMovies);
     } else {
       const updatedTv = tv.filter((show) => show.media_id !== id);
       setTv(updatedTv);
     }
-    axios.delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`);
   };
-  console.log(movies);
+
+  useEffect(() => {
+    axios.delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`);
+  }, [movies, tv]);
+
   return (
     <div className="favorites">
       <h1>Movies</h1>
