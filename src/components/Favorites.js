@@ -9,7 +9,7 @@ const Favorites = ({ user }) => {
 
   useEffect(() => {
     axios
-      .post(`https://tmdb-back-w5b3.onrender.com/api/favorites`, {
+      .get(`https://tmdb-back-w5b3.onrender.com/api/favorites`, {
         username: user,
       })
       .then((res) => {
