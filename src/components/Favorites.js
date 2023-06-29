@@ -7,8 +7,8 @@ const Favorites = ({ user }) => {
   const [tv, setTv] = useState([]);
   const [deletedId, setDeletedId] = useState(null); // New state variable to store the deleted id
 
-  console.log(user);
   useEffect(() => {
+    console.log(user);
     axios
       .get(`https://tmdb-back-w5b3.onrender.com/api/favorites`, {
         username: user,
