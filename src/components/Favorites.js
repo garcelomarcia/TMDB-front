@@ -19,9 +19,16 @@ const Favorites = ({ user }) => {
 
   const handleDelete = (e) => {
     const path = e.target.previousSibling.href.split("/");
-    const id = path.pop();
+    const id = path[path.length - 1];
+    const type = path[path.length - 2];
+    if (type === "movies") {
+      const updatedMovies = movies.filter((movie) => movie.media_id !== id);
+      setMovies(updatedMovies);
+    } else {
+      const updatedTv = tv.filter((show) => show.media_id !== id);
+      setTv(updatedTv);
+    }
     axios.delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`);
-    window.location.reload();
   };
   console.log(movies);
   return (
