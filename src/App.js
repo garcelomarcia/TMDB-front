@@ -31,6 +31,38 @@ const App = () => {
     axios.get(url).then((result) => setMovies(result.data.results));
   };
 
+  const handleLogin = (e, user) => {
+    e.preventDefault();
+
+    axios
+      .post("https://tmdb-back-w5b3.onrender.com/api/login", user)
+      .then((response) => {
+        const token = response.data;
+
+        // Store the token in localStorage
+        localStorage.setItem("token", token);
+
+        // Make a separate request to fetch user data using the token
+        return axios.get("https://tmdb-back-w5b3.onrender.com/api/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      })
+      .then((userResponse) => {
+        const user = userResponse.data;
+
+        // Set the user and show an alert
+        setUser(user);
+        alert(`Logged in as ${user.username}`);
+        // navigate("/");
+        // window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     axios
       .get("https://tmdb-back-w5b3.onrender.com/api")
@@ -46,7 +78,7 @@ const App = () => {
         console.log(`found user ${user.username}`);
         setLogin(user.username);
       });
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <div>
@@ -61,7 +93,7 @@ const App = () => {
         <Route path="/tv" element={<Grid movies={movies} />} />
         <Route path="movies/:id" element={<Detail />} />
         <Route path="tv/:id" element={<Detail />} />
-        <Route path="/login" element={<Login isLoggedIn={isLoggedIn} />} />
+        <Route path="/login" element={<Login login={handleLogin} />} />
         <Route path="/favorites" element={<Favorites user={isLoggedIn} />} />
       </Routes>
     </div>

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-const Login = () => {
-  const navigate = useNavigate();
+
+const Login = ({ login }) => {
   const [user, setUser] = useState({ username: "", password: "" });
 
   const handleChange = (evt) => {
@@ -11,38 +10,6 @@ const Login = () => {
       ...user,
       [evt.target.name]: value,
     });
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    axios
-      .post("https://tmdb-back-w5b3.onrender.com/api/login", user)
-      .then((response) => {
-        const token = response.data;
-
-        // Store the token in localStorage
-        localStorage.setItem("token", token);
-
-        // Make a separate request to fetch user data using the token
-        return axios.get("https://tmdb-back-w5b3.onrender.com/api/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      })
-      .then((userResponse) => {
-        const user = userResponse.data;
-
-        // Set the user and show an alert
-        setUser(user);
-        alert(`Logged in as ${user.username}`);
-        navigate("/");
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const handleSignup = (e) => {
@@ -59,7 +26,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <form className="form" onSubmit={handleLogin}>
+      <form className="form" onSubmit={() => login(e, user)}>
         <h3>Login/Signup</h3>
         <input
           type="text"
