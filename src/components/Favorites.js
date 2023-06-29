@@ -26,11 +26,11 @@ const Favorites = ({ user }) => {
     const type = path[path.length - 2];
 
     if (type === "movies") {
-      const updatedMovies = movies.filter((movie) => movie.media_id !== id);
-      setMovies([...updatedMovies]); // Use spread operator to create a new array reference
+      setMovies((prevMovies) =>
+        prevMovies.filter((movie) => movie.media_id !== id)
+      );
     } else {
-      const updatedTv = tv.filter((show) => show.media_id !== id);
-      setTv([...updatedTv]); // Use spread operator to create a new array reference
+      setTv((prevTv) => prevTv.filter((show) => show.media_id !== id));
     }
     setDeletedId(id);
   };
