@@ -53,10 +53,10 @@ const App = () => {
         const user = userResponse.data;
 
         // Set the user and show an alert
-        setUser(user);
+        setLogin(user.username);
         alert(`Logged in as ${user.username}`);
-        // navigate("/");
-        // window.location.reload();
+        navigate("/");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
