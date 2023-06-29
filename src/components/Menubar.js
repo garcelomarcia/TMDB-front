@@ -135,12 +135,12 @@ const Menubar = ({ handleSubmit, handleBrowse, isLoggedIn }) => {
             </div>
           </li>
           <li>
-            {!isLoggedIn ? (
+            {!logged ? (
               <Link to={"/login"}>Login</Link>
             ) : (
               <>
                 <Link to={"/login"} id="username">
-                  {isLoggedIn}
+                  {logged}
                   <i className="fas fa-caret-down"></i>
                 </Link>
                 <div className="dropdown-menu">
