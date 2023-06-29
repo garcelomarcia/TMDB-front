@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Grid from "./components/Grid";
 import Detail from "./components/Detail";
 import Login from "./components/Login";
@@ -9,6 +9,7 @@ import Favorites from "./components/Favorites";
 // import api_key from "../api/config";
 const api_key = "a763d45bd50154ae259188fe582406df";
 const App = () => {
+  const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [isLoggedIn, setLogin] = useState("");
 

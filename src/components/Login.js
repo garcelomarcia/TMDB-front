@@ -26,7 +26,7 @@ const Login = ({ login }) => {
 
   return (
     <div className="login">
-      <form className="form" onSubmit={() => login(e, user)}>
+      <form className="form" onSubmit={() => login(user)}>
         <h3>Login/Signup</h3>
         <input
           type="text"
