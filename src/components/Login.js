@@ -24,9 +24,13 @@ const Login = ({ login }) => {
       .catch(() => alert("Signup Failed"));
   };
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    login(user);
+  };
   return (
     <div className="login">
-      <form className="form" onSubmit={() => login(user)}>
+      <form className="form" onSubmit={handleLogin}>
         <h3>Login/Signup</h3>
         <input
           type="text"

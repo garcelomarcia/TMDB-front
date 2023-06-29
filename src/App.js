@@ -32,8 +32,7 @@ const App = () => {
     axios.get(url).then((result) => setMovies(result.data.results));
   };
 
-  const handleLogin = (e, user) => {
-    e.preventDefault();
+  const handleLogin = (user) => {
     console.log(user);
     axios
       .post("https://tmdb-back-w5b3.onrender.com/api/login", user)
