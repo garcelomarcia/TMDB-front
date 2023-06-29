@@ -34,7 +34,7 @@ const App = () => {
 
   const handleLogin = (e, user) => {
     e.preventDefault();
-
+    console.log(user);
     axios
       .post("https://tmdb-back-w5b3.onrender.com/api/login", user)
       .then((response) => {
