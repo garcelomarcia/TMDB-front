@@ -8,16 +8,17 @@ const Favorites = ({ user }) => {
   // const [deletedId, setDeletedId] = useState(null); // New state variable to store the deleted id
 
   const handleDelete = (e) => {
+    let updatedMovies, updatedTv;
     const path = e.target.previousSibling.href.split("/");
     const id = path[path.length - 1];
     const type = path[path.length - 2];
 
     if (type === "movies") {
-      setMovies((prevMovies) =>
-        prevMovies.filter((movie) => movie.media_id !== id)
-      );
+      updatedMovies = movies.filter((movie) => movie.media_id !== id);
+      setMovies(updatedMovies); // Update state immediately
     } else {
-      setTv((prevTv) => prevTv.filter((show) => show.media_id !== id));
+      updatedTv = tv.filter((show) => show.media_id !== id);
+      setTv(updatedTv); // Update state immediately
     }
     axios.delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`);
   };
