@@ -8,35 +8,20 @@ const Favorites = ({ user }) => {
   // const [deletedId, setDeletedId] = useState(null); // New state variable to store the deleted id
 
   const handleDelete = (e) => {
-    // ...
-
-    let updatedMovies, updatedTv;
+    const path = e.target.previousSibling.href.split("/");
+    const id = path[path.length - 1];
+    const type = path[path.length - 2];
 
     if (type === "movies") {
-      updatedMovies = movies.filter((movie) => movie.media_id !== id);
-      setMovies(updatedMovies); // Update state immediately
+      setMovies((prevMovies) =>
+        prevMovies.filter((movie) => movie.media_id !== id)
+      );
     } else {
-      updatedTv = tv.filter((show) => show.media_id !== id);
-      setTv(updatedTv); // Update state immediately
+      setTv((prevTv) => prevTv.filter((show) => show.media_id !== id));
     }
-
-    // setDeletedId(id);
-
-    axios
-      .delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`)
-      .then(() => {
-        // Deletion was successful, no action needed
-      })
-      .catch((error) => {
-        // Deletion failed, revert the changes made to the UI
-        if (type === "movies") {
-          setMovies([...movies]); // Revert the state to the original value
-        } else {
-          setTv([...tv]); // Revert the state to the original value
-        }
-        // setDeletedId(null);
-        console.error("Failed to delete favorites:", error);
-      });
+    axios.delete(
+      `https://tmdb-back-w5b3.onrender.com/api/favorites/${deletedId}`
+    );
   };
 
   // useEffect(() => {
