@@ -8,15 +8,17 @@ const Favorites = ({ user }) => {
   const [deletedId, setDeletedId] = useState(null); // New state variable to store the deleted id
 
   useEffect(() => {
-    axios
-      .post(`https://tmdb-back-w5b3.onrender.com/api/favorites`, {
-        username: user,
-      })
-      .then((res) => {
-        setMovies(res.data.movieList);
-        setTv(res.data.tvList);
-      });
-  }, []);
+    if (user) {
+      axios
+        .post(`https://tmdb-back-w5b3.onrender.com/api/favorites`, {
+          username: user,
+        })
+        .then((res) => {
+          setMovies(res.data.movieList);
+          setTv(res.data.tvList);
+        });
+    }
+  }, [user]);
 
   const handleDelete = (e) => {
     const path = e.target.previousSibling.href.split("/");
