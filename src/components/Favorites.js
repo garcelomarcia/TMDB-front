@@ -5,36 +5,26 @@ import { Link } from "react-router-dom";
 const Favorites = ({ user }) => {
   const [movies, setMovies] = useState([]);
   const [tv, setTv] = useState([]);
-  // const [deletedId, setDeletedId] = useState(null); // New state variable to store the deleted id
 
   const handleDelete = (e) => {
-    let updatedMovies, updatedTv;
     const path = e.target.previousSibling.href.split("/");
     const id = path[path.length - 1];
     const type = path[path.length - 2];
 
     if (type === "movies") {
-      updatedMovies = movies.filter((movie) => movie.media_id !== id);
+      const updatedMovies = movies.filter((movie) => movie.media_id !== id);
       setMovies(updatedMovies); // Update state immediately
     } else {
-      updatedTv = tv.filter((show) => show.media_id !== id);
+      const updatedTv = tv.filter((show) => show.media_id !== id);
       setTv(updatedTv); // Update state immediately
     }
-    axios.delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`);
-  };
 
-  // useEffect(() => {
-  //   if (deletedId) {
-  //     axios
-  //       .delete(
-  //         `https://tmdb-back-w5b3.onrender.com/api/favorites/${deletedId}`
-  //       )
-  //       .then(() => {
-  //         // Reset the deletedId state variable after successful deletion
-  //         setDeletedId(null);
-  //       });
-  //   }
-  // }, [deletedId]);
+    axios
+      .delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`)
+      .catch((error) => {
+        console.error("Failed to delete favorites:", error);
+      });
+  };
 
   useEffect(() => {
     if (user) {
