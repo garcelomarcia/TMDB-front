@@ -15,7 +15,7 @@ const Favorites = ({ user }) => {
         setMovies(res.data.movieList);
         setTv(res.data.tvList);
       });
-  }, []);
+  }, [movies, tv]);
 
   const handleDelete = (e) => {
     const path = e.target.previousSibling.href.split("/");
@@ -23,6 +23,7 @@ const Favorites = ({ user }) => {
     axios.delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`);
     window.location.reload();
   };
+  console.log(movies);
   return (
     <div className="favorites">
       <h1>Movies</h1>
