@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Favorites = ({ user }) => {
-  const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [tv, setTv] = useState([]);
 
@@ -16,12 +15,13 @@ const Favorites = ({ user }) => {
         setMovies(res.data.movieList);
         setTv(res.data.tvList);
       });
-  }, [movies, tv]);
+  }, []);
 
   const handleDelete = (e) => {
     const path = e.target.previousSibling.href.split("/");
     const id = path.pop();
     axios.delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`);
+    window.location.reload();
   };
   return (
     <div className="favorites">
