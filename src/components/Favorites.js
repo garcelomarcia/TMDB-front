@@ -9,18 +9,9 @@ const Favorites = ({ user }) => {
   const handleDelete = (e) => {
     const path = e.target.previousSibling.href.split("/");
     const id = path[path.length - 1];
-    const type = path[path.length - 2];
-
-    if (type === "movies") {
-      const updatedMovies = movies.filter((movie) => movie.media_id !== id);
-      setMovies(updatedMovies); // Update state immediately
-    } else {
-      const updatedTv = tv.filter((show) => show.media_id !== id);
-      setTv(updatedTv); // Update state immediately
-    }
-
     axios
       .delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`)
+      .then(() => window.location.reload())
       .catch((error) => {
         console.error("Failed to delete favorites:", error);
       });
