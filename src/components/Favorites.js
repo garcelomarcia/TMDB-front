@@ -15,7 +15,7 @@ const Favorites = ({ user }) => {
         setMovies(res.data.movieList);
         setTv(res.data.tvList);
       });
-  }, [movies, tv]);
+  }, []);
 
   const handleDelete = (e) => {
     const path = e.target.previousSibling.href.split("/");
