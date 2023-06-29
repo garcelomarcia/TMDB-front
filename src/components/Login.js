@@ -37,6 +37,8 @@ const Login = () => {
         // Set the user and show an alert
         setUser(user);
         alert(`Logged in as ${user.username}`);
+        navigate("/");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
