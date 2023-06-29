@@ -22,15 +22,15 @@ const Favorites = ({ user }) => {
     const path = e.target.previousSibling.href.split("/");
     const id = path[path.length - 1];
     const type = path[path.length - 2];
-    console.log(id, type);
+
     if (type === "movies") {
       const updatedMovies = movies.filter((movie) => movie.media_id !== id);
-      setMovies(updatedMovies);
+      setMovies([...updatedMovies]); // Use spread operator to create a new array reference
     } else {
       const updatedTv = tv.filter((show) => show.media_id !== id);
-      setTv(updatedTv);
+      setTv([...updatedTv]); // Use spread operator to create a new array reference
     }
-    setDeletedId(id); // Store the deleted id in the state variable
+    setDeletedId(id);
   };
 
   useEffect(() => {
