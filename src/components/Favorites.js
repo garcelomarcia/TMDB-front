@@ -5,35 +5,52 @@ import { Link } from "react-router-dom";
 const Favorites = ({ user }) => {
   const [movies, setMovies] = useState([]);
   const [tv, setTv] = useState([]);
-  const [deletedId, setDeletedId] = useState(null); // New state variable to store the deleted id
+  // const [deletedId, setDeletedId] = useState(null); // New state variable to store the deleted id
 
   const handleDelete = (e) => {
-    const path = e.target.previousSibling.href.split("/");
-    const id = path[path.length - 1];
-    const type = path[path.length - 2];
+    // ...
+
+    let updatedMovies, updatedTv;
 
     if (type === "movies") {
-      setMovies((prevMovies) =>
-        prevMovies.filter((movie) => movie.media_id !== id)
-      );
+      updatedMovies = movies.filter((movie) => movie.media_id !== id);
+      setMovies(updatedMovies); // Update state immediately
     } else {
-      setTv((prevTv) => prevTv.filter((show) => show.media_id !== id));
+      updatedTv = tv.filter((show) => show.media_id !== id);
+      setTv(updatedTv); // Update state immediately
     }
-    setDeletedId(id);
+
+    // setDeletedId(id);
+
+    axios
+      .delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`)
+      .then(() => {
+        // Deletion was successful, no action needed
+      })
+      .catch((error) => {
+        // Deletion failed, revert the changes made to the UI
+        if (type === "movies") {
+          setMovies([...movies]); // Revert the state to the original value
+        } else {
+          setTv([...tv]); // Revert the state to the original value
+        }
+        // setDeletedId(null);
+        console.error("Failed to delete favorites:", error);
+      });
   };
 
-  useEffect(() => {
-    if (deletedId) {
-      axios
-        .delete(
-          `https://tmdb-back-w5b3.onrender.com/api/favorites/${deletedId}`
-        )
-        .then(() => {
-          // Reset the deletedId state variable after successful deletion
-          setDeletedId(null);
-        });
-    }
-  }, [deletedId]);
+  // useEffect(() => {
+  //   if (deletedId) {
+  //     axios
+  //       .delete(
+  //         `https://tmdb-back-w5b3.onrender.com/api/favorites/${deletedId}`
+  //       )
+  //       .then(() => {
+  //         // Reset the deletedId state variable after successful deletion
+  //         setDeletedId(null);
+  //       });
+  //   }
+  // }, [deletedId]);
 
   useEffect(() => {
     if (user) {
