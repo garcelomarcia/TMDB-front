@@ -19,9 +19,7 @@ const Favorites = ({ user }) => {
     } else {
       setTv((prevTv) => prevTv.filter((show) => show.media_id !== id));
     }
-    axios.delete(
-      `https://tmdb-back-w5b3.onrender.com/api/favorites/${deletedId}`
-    );
+    axios.delete(`https://tmdb-back-w5b3.onrender.com/api/favorites/${id}`);
   };
 
   // useEffect(() => {
