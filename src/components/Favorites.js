@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Favorites = ({ user }) => {
-  const { pathname } = useLocation();
+  const { path } = useLocation();
+  const pathname = path.split("/")[0]
   const [movies, setMovies] = useState([]);
   const [tv, setTv] = useState([]);
 
