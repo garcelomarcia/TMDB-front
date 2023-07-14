@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Favorites = ({ user }) => {
+  const { pathname } = useLocation();
   const [movies, setMovies] = useState([]);
   const [tv, setTv] = useState([]);
 
@@ -37,7 +38,7 @@ const Favorites = ({ user }) => {
         {movies.map((movie, i) => {
           return (
             <div key={i}>
-              <Link to={`http://localhost:3000/movies/${movie.media_id}`}>
+              <Link to={`${pathname}/movies/${movie.media_id}`}>
                 <img
                   className="card"
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -57,7 +58,7 @@ const Favorites = ({ user }) => {
         {tv.map((show, i) => {
           return (
             <div key={i}>
-              <Link to={`http://localhost:3000/tv/${show.media_id}`}>
+              <Link to={`${pathname}/tv/${show.media_id}`}>
                 <img
                   className="card"
                   src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
